@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bu2pld2ef5lsm"]
+
+[ext_resource type="Texture2D" uid="uid://do3otll5ht1aq" path="res://World/BoardBottom.png" id="1_k831e"]
+[ext_resource type="Texture2D" uid="uid://def33a0jngs4i" path="res://World/Board.png" id="1_l2112"]
+[ext_resource type="Texture2D" uid="uid://tyblgvgg0mdo" path="res://World/BCK.png" id="1_s0qm6"]
+[ext_resource type="Texture2D" uid="uid://dtmsyx0cveg8d" path="res://Characters/Pawn.png" id="2_01r6y"]
+[ext_resource type="Texture2D" uid="uid://bqsji3e1n6dgd" path="res://Characters/Tower.png" id="3_k831e"]
+[ext_resource type="Texture2D" uid="uid://dv5m5jhw8xohc" path="res://Characters/Horse.png" id="4_s0qm6"]
+[ext_resource type="Texture2D" uid="uid://m6d07wlbxarj" path="res://Characters/Bishop.png" id="5_n13uo"]
+[ext_resource type="Texture2D" uid="uid://bnqoh8wnikwtc" path="res://Characters/Lady.png" id="6_4y8hy"]
+[ext_resource type="Texture2D" uid="uid://cc1hgunn68qeb" path="res://Characters/King.png" id="7_8f785"]
+
+[node name="Board" type="Node2D" unique_id=756859854]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=355985410]
+offset_left = -96.0
+offset_top = -35.0
+offset_right = 224.0
+offset_bottom = 173.0
+texture = ExtResource("1_s0qm6")
+stretch_mode = 1
+flip_h = true
+
+[node name="BoardBottom" type="Sprite2D" parent="." unique_id=1668055139]
+position = Vector2(64, 136)
+texture = ExtResource("1_k831e")
+
+[node name="Board" type="Sprite2D" parent="." unique_id=1077469104]
+position = Vector2(64, 64)
+texture = ExtResource("1_l2112")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1439818115]
+position = Vector2(64, 64)
+zoom = Vector2(4, 4)
+
+[node name="Pawn" type="Sprite2D" parent="." unique_id=1116577993]
+position = Vector2(8, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Pawn2" type="Sprite2D" parent="." unique_id=976005412]
+position = Vector2(24, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Pawn3" type="Sprite2D" parent="." unique_id=1564414943]
+position = Vector2(40, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Pawn4" type="Sprite2D" parent="." unique_id=654313201]
+position = Vector2(56, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Pawn5" type="Sprite2D" parent="." unique_id=891862657]
+position = Vector2(72, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Pawn6" type="Sprite2D" parent="." unique_id=221669398]
+position = Vector2(88, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Pawn7" type="Sprite2D" parent="." unique_id=292302537]
+position = Vector2(104, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Pawn8" type="Sprite2D" parent="." unique_id=835987406]
+position = Vector2(120, 24)
+texture = ExtResource("2_01r6y")
+
+[node name="Tower" type="Sprite2D" parent="." unique_id=584854393]
+position = Vector2(8, 8)
+texture = ExtResource("3_k831e")
+
+[node name="Tower2" type="Sprite2D" parent="." unique_id=378175371]
+position = Vector2(120, 8)
+texture = ExtResource("3_k831e")
+
+[node name="Horse" type="Sprite2D" parent="." unique_id=464746692]
+position = Vector2(24, 8)
+texture = ExtResource("4_s0qm6")
+
+[node name="Horse2" type="Sprite2D" parent="." unique_id=56645729]
+position = Vector2(104, 8)
+texture = ExtResource("4_s0qm6")
+
+[node name="Bishop" type="Sprite2D" parent="." unique_id=1298419636]
+position = Vector2(40, 8)
+texture = ExtResource("5_n13uo")
+
+[node name="Bishop2" type="Sprite2D" parent="." unique_id=2053046456]
+position = Vector2(88, 8)
+texture = ExtResource("5_n13uo")
+
+[node name="Lady" type="Sprite2D" parent="." unique_id=1281363598]
+position = Vector2(56, 8)
+texture = ExtResource("6_4y8hy")
+
+[node name="King" type="Sprite2D" parent="." unique_id=2108545221]
+position = Vector2(72, 8)
+texture = ExtResource("7_8f785")
