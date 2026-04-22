@@ -12,5 +12,5 @@ extends Node
 	"win": $win,
 }
 
-func playSound(name):
-	sounds[name].play()
+func playSound(_name):
+	sounds[_name].play()
