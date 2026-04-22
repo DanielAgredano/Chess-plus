@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://tujqbj6cf4an"
+path="res://.godot/imported/Mask Flash.wav-7b70745d3350abcfd5f67283bc74d882.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Mask Flash.wav"
+dest_files=["res://.godot/imported/Mask Flash.wav-7b70745d3350abcfd5f67283bc74d882.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

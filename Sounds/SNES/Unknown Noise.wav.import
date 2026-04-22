@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3tq7c3acqvqs"
+path="res://.godot/imported/Unknown Noise.wav-85f7571e11e3a68fce530d9562fabe7a.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Unknown Noise.wav"
+dest_files=["res://.godot/imported/Unknown Noise.wav-85f7571e11e3a68fce530d9562fabe7a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

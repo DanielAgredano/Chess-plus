@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d1vxerstcfl21"
+path="res://.godot/imported/Bone Stomp.wav-77ea143352f8ba962aaded7591a21413.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Bone Stomp.wav"
+dest_files=["res://.godot/imported/Bone Stomp.wav-77ea143352f8ba962aaded7591a21413.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

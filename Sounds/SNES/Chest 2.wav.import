@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://jhajuxukbg2i"
+path="res://.godot/imported/Chest 2.wav-5424eeabd9aea42bda099786af442e0d.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Chest 2.wav"
+dest_files=["res://.godot/imported/Chest 2.wav-5424eeabd9aea42bda099786af442e0d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

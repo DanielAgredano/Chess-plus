@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cxhfh1x687t1g"]
+
+[ext_resource type="Script" uid="uid://4jsx144v0lpd" path="res://GUI/hp_bar.gd" id="1_agv70"]
+[ext_resource type="Texture2D" uid="uid://cfqk4rthne4d0" path="res://GUI/HPBar.png" id="1_ga7ig"]
+[ext_resource type="Texture2D" uid="uid://bs13r77tf82qf" path="res://GUI/Bar.png" id="2_agv70"]
+
+[node name="Bar1" type="Node2D" unique_id=1247177167]
+script = ExtResource("1_agv70")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=581015656]
+texture = ExtResource("1_ga7ig")
+centered = false
+
+[node name="Fill" type="ColorRect" parent="." unique_id=1328827387]
+clip_children = 1
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 62.0
+offset_bottom = 13.0
+
+[node name="Sprite" type="Sprite2D" parent="Fill" unique_id=456805509]
+texture = ExtResource("2_agv70")
+centered = false

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbo2li566bntj"
+path="res://.godot/imported/File Select Open.wav-f4b1efb05486fd85469befd922bbe8ab.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/File Select Open.wav"
+dest_files=["res://.godot/imported/File Select Open.wav-f4b1efb05486fd85469befd922bbe8ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

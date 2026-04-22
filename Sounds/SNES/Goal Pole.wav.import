@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ycup1rcwprw3"
+path="res://.godot/imported/Goal Pole.wav-51e6d3479a190cd81404760a3f40056e.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Goal Pole.wav"
+dest_files=["res://.godot/imported/Goal Pole.wav-51e6d3479a190cd81404760a3f40056e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

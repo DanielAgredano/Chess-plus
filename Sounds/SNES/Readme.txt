@@ -1,0 +1,1 @@
+Recorded by Yingchun Soul by using Mesen-SX and Mesen 2 with Cubic Interpolation, edited by using Audacity

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b56hqim7trpv"
+path="res://.godot/imported/Door Enter.wav-b8edf117fc4865a303b7f064f9771836.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Door Enter.wav"
+dest_files=["res://.godot/imported/Door Enter.wav-b8edf117fc4865a303b7f064f9771836.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

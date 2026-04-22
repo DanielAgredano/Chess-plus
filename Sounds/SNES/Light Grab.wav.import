@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://gkx3gflk0oe1"
+path="res://.godot/imported/Light Grab.wav-9480afa1508fd4553db60bd5602146a9.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Light Grab.wav"
+dest_files=["res://.godot/imported/Light Grab.wav-9480afa1508fd4553db60bd5602146a9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

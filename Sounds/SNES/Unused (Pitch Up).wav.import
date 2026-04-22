@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3yowvjb5ods"
+path="res://.godot/imported/Unused (Pitch Up).wav-63d0d02267f45bf7555daf69b25588d6.sample"
+
+[deps]
+
+source_file="res://Sounds/SNES/Unused (Pitch Up).wav"
+dest_files=["res://.godot/imported/Unused (Pitch Up).wav-63d0d02267f45bf7555daf69b25588d6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
