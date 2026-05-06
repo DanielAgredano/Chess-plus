@@ -15,6 +15,10 @@ run/main_scene="uid://bu2pld2ef5lsm"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+NetworkManager="*uid://c57axwbnolbda"
+
 [debug]
 
 gdscript/warnings/unused_parameter=0

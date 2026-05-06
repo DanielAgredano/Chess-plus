@@ -35,7 +35,9 @@
 [ext_resource type="Texture2D" uid="uid://dyv2iggx1lt0g" path="res://World/RpgBCK/3.png" id="24_3hk57"]
 [ext_resource type="Texture2D" uid="uid://cmq46asqc3gj8" path="res://World/RpgBCK/2.png" id="25_bmata"]
 [ext_resource type="Texture2D" uid="uid://b7b6xnxhuj6j6" path="res://World/RpgBCK/1.png" id="26_2b80m"]
+[ext_resource type="Texture2D" uid="uid://c7drydujny4k2" path="res://GUI/Blue.png" id="26_6pv63"]
 [ext_resource type="Texture2D" uid="uid://dygi86mbbbkrq" path="res://World/RpgBCK/0.png" id="27_3ird4"]
+[ext_resource type="Texture2D" uid="uid://lvo0di5bifgt" path="res://GUI/Red.png" id="27_6u8bu"]
 [ext_resource type="Texture2D" uid="uid://b65xwy7wpqnql" path="res://GUI/Actions.png" id="29_6xiau"]
 [ext_resource type="Texture2D" uid="uid://5nc8xfu8ybo1" path="res://GUI/Advantage.png" id="29_ichqr"]
 [ext_resource type="PackedScene" uid="uid://cxhfh1x687t1g" path="res://GUI/HPBar.tscn" id="29_n8xpw"]
@@ -740,6 +742,25 @@ shader = SubResource("Shader_vaywm")
 shader_parameter/palette_texture = ExtResource("12_2rh8l")
 shader_parameter/idx = 0
 shader_parameter/opc = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kjqoo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_6pv63")
+}],
+"loop": true,
+"name": &"Blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_6u8bu")
+}],
+"loop": true,
+"name": &"Red",
+"speed": 5.0
+}]
 
 [sub_resource type="Shader" id="Shader_w4fsn"]
 resource_local_to_scene = true
@@ -2126,6 +2147,11 @@ material = SubResource("ShaderMaterial_oca5n")
 position = Vector2(152, 8)
 texture = ExtResource("13_qx3vs")
 
+[node name="Player" type="AnimatedSprite2D" parent="." unique_id=1070142983]
+position = Vector2(152, 128)
+sprite_frames = SubResource("SpriteFrames_kjqoo")
+animation = &"Blue"
+
 [node name="RPG" type="ColorRect" parent="." unique_id=1057597565]
 process_mode = 3
 clip_children = 1
@@ -2399,6 +2425,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="Anim" type="AnimationPlayer" parent="CanvasLayer" unique_id=1807638594]
 libraries/ = SubResource("AnimationLibrary_4p0g0")

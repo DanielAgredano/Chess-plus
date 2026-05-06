@@ -16,15 +16,33 @@ var tar = null
 var turn = "Blue"
 var finished = false
 var toUpgrade = false
+var local_player_id = ""
 
 func _ready():
+	local_player_id = NetworkManager.local_player_id
+	$"../Player".play(local_player_id)
 	$"../Buttons/GridContainer".press.connect(press)
 	$"../Buttons/Upgrade".press.connect(upgrade)
+	# Listen to the Server via NetworkManager
+	NetworkManager.move_confirmed.connect(_on_move_confirmed)
+	NetworkManager.move_error.connect(_on_move_error)
+	NetworkManager.color_assigned.connect(_on_color_assigned)
+	NetworkManager.match_started.connect(_on_match_started)
+	
 	var red = $Red.get_children()
 	var blue = $Blue.get_children()
 	for i in range(8):
 		for j in [[0,8,red],[1,0,red],[6,0,blue],[7,8,blue]]:
 			board[i][j[0]] = j[2][i+j[1]]
+
+func _on_color_assigned(color: String):
+	local_player_id = color
+	print("I am playing as: ", local_player_id)
+	$"../Player".play(local_player_id)
+
+func _on_match_started():
+	print("Both players connected. Match starts!")
+	set_process_input(true) # Allow clicking now
 
 func opposite(color):
 	return {"Blue":"Red","Red":"Blue"}[color]
@@ -38,11 +56,42 @@ func getPiece(vec):
 func setPiece(vec,val):
 	board[vec.x][vec.y] = val
 
+func request_move(sel_pos: Vector2i, target_pos: Vector2i):
+	# INSTEAD of moving immediately, ask the server:
+	NetworkManager.send_move_action(sel_pos, target_pos, local_player_id)
+
+# Triggered ONLY when the server approves the move
+func _on_move_confirmed(origin: Vector2i, destination: Vector2i, new_turn: String):
+	var piece = board[origin.x][origin.y]
+	
+	# Execute visuals (Animations and Sounds)
+	var startPos = origin * 16 + Vector2i(8,8)
+	var endPos = Vector2i(8,8) + destination * 16
+	$T_Move.startMove(piece, startPos, endPos)
+	$"../Sound".playSound("move")
+	
+	# Update local board state
+	setPiece(destination, piece)
+	setPiece(origin, null)
+	changeTurn()
+	moveSelection(sel)
+	
+	turn = new_turn
+	#changeTurnVisuals()
+
+func _on_move_error(reason: String):
+	print("Server rejected the move: ", reason)
+	# Here you could play an error sound or deselect the piece
+	sel = null
+	moveSelection(null)
+
 func press(vec):
+	if turn != local_player_id: return
 	if finished: return
 	if toUpgrade: return
 	if sel != null:
-		move(vec)
+		#move(vec)
+		request_move(sel,vec)
 	else:
 		select(vec)
 	moveSelection(vec)
@@ -121,20 +170,29 @@ func changeTurn():
 	$"../Turn".material.set_shader_parameter("idx",["Blue","Red"].find(turn))
 	sel = null
 
+func captureKing(piece):
+	if piece.name.left(1) != 'K': return
+	$"../Win/Anim".play(turn)
+	$"../CanvasLayer/Anim".play("Out")
+	$"../Sound".playSound("win")
+	$"../Sound/music".stop()
+	finished = true
+
 func capture(can):
-	if not can:
-		changeTurn()
-		moveSelection(tar)
-		$"../Sound".playSound("shield")
-		return
-	$"../Sound".playSound("destroy")
-	getPiece(tar).queue_free()
-	if getPiece(tar).name.left(1) == 'K':
-		$"../Win/Anim".play(turn)
-		$"../CanvasLayer/Anim".play("Out")
-		$"../Sound".playSound("win")
-		$"../Sound/music".stop()
-		finished = true
+	pass
+	#if not can:
+		#changeTurn()
+		#moveSelection(tar)
+		#$"../Sound".playSound("shield")
+		#return
+	#$"../Sound".playSound("destroy")
+	#getPiece(tar).queue_free()
+	#if getPiece(tar).name.left(1) == 'K':
+		#$"../Win/Anim".play(turn)
+		#$"../CanvasLayer/Anim".play("Out")
+		#$"../Sound".playSound("win")
+		#$"../Sound/music".stop()
+		#finished = true
 	
 	var piece = board[sel.x][sel.y]
 	var startPos = sel*16+Vector2i(8,8)

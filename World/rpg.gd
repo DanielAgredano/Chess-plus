@@ -21,6 +21,7 @@ var def = [1.0,1.0]
 var adv = [false,false]
 var clss
 var pieces
+var coords
 var crit = []
 var CLASS = {
 	'P':'W',#Warrior
@@ -37,7 +38,12 @@ var WEAKNESS = {
 }
 
 func _ready():
-	pass
+	NetworkManager.combat_result.connect(_on_combat_result)
+	NetworkManager.combat_started.connect(_on_combat_started)
+
+func _on_combat_started(origin: Vector2i, destination: Vector2i, attacker: String):
+	coords = [origin,destination]
+	start(Pieces.getPiece(origin), Pieces.getPiece(destination), attacker)
 
 func start(sel,vec,_turn):
 	turn = _turn
@@ -63,56 +69,73 @@ func start(sel,vec,_turn):
 	adv[1] = (WEAKNESS[clss[1]] == clss[0])
 	P_adv.emitting = adv[["Red","Blue"].find(turn)]
 
-func press(op):
-	if turn == null: return
-	var defends = ["Blue","Red"].find(turn)
-	var attacks = ["Red","Blue"].find(turn)
-	if op == 'A':
-		hp[defends] -= 0.2 * def[defends]
-		bars[defends].update(hp[defends])
-		def[defends] = 1.0
-		P_hit.position = positions[defends].position
-		P_hit.emitting = true
-		$"../Sound".playSound("hit")
-	if op == 'S':
-		var bonus = 1.0 + float(adv[attacks])
-		hp[defends] -= 0.2 * bonus * def[defends]
-		bars[defends].update(hp[defends])
-		def[defends] = 1.0
-		P_sp.position = positions[defends].position
-		P_sp.emitting = true
-		$"../Sound".playSound("special")
-	if op == 'D':
-		if def[attacks] == 0.5: return
-		def[attacks] = 0.5
-		$"../Sound".playSound("shield")
-	if op == 'R':
-		if crit == []:
-			crit = [0,0,0]
-			crit[randi_range(0,len(crit)-1)] = 1
-		if crit[0]:
-			hp[defends] -= 0.6 * def[defends]
-			bars[defends].update(hp[defends])
-			def[defends] = 1.0
-			P_crit.position = positions[defends].position
-			P_crit.emitting = true
-			$"../Sound".playSound("crit")
-		crit.remove_at(0)
-	#Turn end
-	if hp[defends] <= 0.01:
+func press(op: String):
+	if turn == null or turn != $"../Pieces".local_player_id: 
+		return
+	#print(op," ",$"../Pieces".local_player_id)
+	NetworkManager.send_combat_action(op, turn)
+
+# Triggered ONLY when the server sends the calculation back
+func _on_combat_result(data: Dictionary):
+	var action = data["action"]
+	var is_crit = data["is_crit"]
+	
+	# Find who was defending to update their particles/UI
+	var defends_idx = 1 if data["attacker"] == "Red" else 0
+	
+	# 1. Update visual HP Bars with the exact numbers the server dictated
+	bars[0].update(data["new_hp_red"])
+	bars[1].update(data["new_hp_blue"])
+	
+	# 2. Play matching sounds and particles based on the action and crit flag
+	match action:
+		'A':
+			P_hit.position = positions[defends_idx].position
+			P_hit.emitting = true
+			$"../Sound".playSound("hit")
+			P_shields[defends_idx].emitting = false
+		'S':
+			P_sp.position = positions[defends_idx].position
+			P_sp.emitting = true
+			$"../Sound".playSound("special")
+		'D':
+			$"../Sound".playSound("shield")
+			P_shields[1 - defends_idx].emitting = true
+		'R':
+			if is_crit:
+				P_crit.position = positions[defends_idx].position
+				P_crit.emitting = true
+				$"../Sound".playSound("crit")
+			else:
+				# Normal hit if roulette failed
+				P_hit.position = positions[defends_idx].position
+				P_hit.emitting = true
+				$"../Sound".playSound("hit")
+
+	# 3. Handle battle end or turn change
+	if data["battle_ended"]:
 		get_tree().paused = false
 		$"../Actions/Animation".play_backwards("Open")
 		$Anim.play_backwards("intro")
-		Pieces.capture(turn == startTurn)
-		turn = null
+		if data["attacker_won"]:
+			var attacker = data["attacker"]
+			var attacker_ref = red if attacker == "Red" else blue
+			var defender_ref = blue if attacker == "Red" else red
+			attacker_ref.position = defender_ref.position
+			Pieces.captureKing(defender_ref)
+			defender_ref.queue_free()
+			Pieces.board[coords[1].x][coords[1].y]=attacker_ref
+			Pieces.board[coords[0].x][coords[0].y]=null
+			Pieces.moveSelection(null)
+		else:
+			pass
 		P_adv.emitting = false
 		for s in range(2): P_shields[s].emitting = false
+		Pieces.changeTurn()
 	else:
-		turn = {"Blue":"Red","Red":"Blue"}[turn]
+		# Update turn visuals if combat continues
+		turn = "Blue" if data["attacker"] == "Red" else "Red"
 		updatePalette()
-		P_adv.emitting = adv[defends]
-		for s in range(2): P_shields[s].emitting = (def[s] == 0.5)
-	return true
 
 func updatePalette():
 	for i in $"../Actions/Sprites".get_children():
